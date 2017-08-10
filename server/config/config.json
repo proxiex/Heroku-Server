@@ -1,0 +1,16 @@
+{
+    "development": {
+        "username": "postgres",
+        "password": "#101bootcamp",
+        "database": "hello_books",
+        "host": "127.0.0.1",
+        "dialect": "postgres"
+    },
+    "test": {
+        "username": "postgres",
+        "password": "#101bootcamp",
+        "database": "hello_books",
+        "host": "127.0.0.1",
+        "dialect": "postgres"
+    }
+}
