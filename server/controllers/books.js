@@ -9,8 +9,7 @@ const addBook = (req, res) => books
         category: req.body.category,
         quantity: req.body.quantity,
         details: req.body.details
-    })
-    .then(createdBooks => res.status(201).send(createdBooks))
+    }).then(createdBooks => res.status(201).send(createdBooks))
     .catch(error => res.status(400).send(error))
 
 const getAll = (req, res) => books
@@ -50,7 +49,9 @@ const update = (req, res) => books
             })
             .then(() => res.status(200).send(books))
             .catch(error => res.status(400).send(error))
-    }).catch(error => res.status(400).send(error))
+    })
+
+.catch(error => res.status(400).send(error))
 
 module.exports = {
     addBook,
