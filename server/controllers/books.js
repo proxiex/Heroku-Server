@@ -26,7 +26,7 @@ const findOne = (req, res) => books
         message: 'Book Not Found!'
       })
     }
-    return res.status(200).send(books)
+    return res.status(200).send(foundBooks)
   })
   .catch(error => res.status(400).send(error))
 
@@ -40,15 +40,21 @@ const update = (req, res) => books
     }
     return books
       .update({
-        book_id: req.body.book_id,
+        ISBN: req.body.ISBN,
         bookname: req.body.bookname,
         author: req.body.author,
         publisher: req.body.publisher,
         category: req.body.category,
         quantity: req.body.quantity,
         details: req.body.details
-      })
-      .then(() => res.status(200).send(books))
+      },
+      {
+        where: {
+          id: req.params.bookId
+        } })
+      .then((bookupdate) => res.status(200).send({
+        message: 'Book has been updated'
+      }))
       .catch(error => res.status(400).send(error))
   })
 
