@@ -9,7 +9,8 @@ const addBook = (req, res) => books
         category: req.body.category,
         quantity: req.body.quantity,
         details: req.body.details
-    }).then(createdBooks => res.status(201).send(createdBooks))
+    })
+    .then(createdBooks => res.status(201).send(createdBooks))
     .catch(error => res.status(400).send(error))
 
 const getAll = (req, res) => books
