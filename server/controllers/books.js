@@ -50,9 +50,7 @@ const update = (req, res) => books
             })
             .then(() => res.status(200).send(books))
             .catch(error => res.status(400).send(error))
-    })
-
-.catch(error => res.status(400).send(error))
+    }).catch(error => res.status(400).send(error))
 
 module.exports = {
     addBook,

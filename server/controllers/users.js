@@ -33,12 +33,12 @@ const login = (req, res) => {
         })
         .then((found) => {
             hashedPassword = bcrypt.compareSync(req.body.password, found.password)
-            //console.log('from Db: ' + found.password + " **** From user: " + hashedPassword)
+                //console.log('from Db: ' + found.password + " **** From user: " + hashedPassword)
             if (found === null) {
                 res.status(401).send({
                     message: "User does not exsist! ",
                 })
-            } else if(hashedPassword){
+            } else if (hashedPassword) {
                 const user = {
                     email: found.email,
                     password: found.password
@@ -51,7 +51,7 @@ const login = (req, res) => {
                     message: "Login Successful!",
                     token: token,
                 })
-            }else{
+            } else {
                 res.status(500).send({
                     message: "Wrong password"
                 })
@@ -60,7 +60,7 @@ const login = (req, res) => {
         })
         .catch(error => res.status(400).send(error))
 }
-module.exports = {
+exports.default = {
     register,
     login,
 }
