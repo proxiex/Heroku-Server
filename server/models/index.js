@@ -3,6 +3,7 @@ const fs = require('fs')
 const path = require('path')
 // process.env.NODE_ENV = 'production';
 const Sequelize = require('sequelize')
+const env = process.env.NODE_ENV || 'development'
 const basename = path.basename(module.filename)
 const config = require('../config/config.json')[env] || 'development'
 const db = {}
