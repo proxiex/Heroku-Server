@@ -1,18 +1,33 @@
 const books = require('../models').book
 
-const addBook = (req, res) => books
-  .create({
-    ISBN: req.body.ISBN,
-    bookname: req.body.bookname,
-    author: req.body.author,
-    publisher: req.body.publisher,
-    category: req.body.category,
-    quantity: req.body.quantity,
-    details: req.body.details
+const addBook = (req, res) => {
+  console.log(req.body)
+  books.find({
+    where: {
+      ISBN: req.body.ISBN
+    }
+  }).then(found => {
+    console.log(found)
+    if (found) {
+      res.status(400).send({
+        message: 'Book already Exist'
+      })
+    } else {
+      return books
+        .create({
+          ISBN: req.body.ISBN,
+          bookname: req.body.bookname,
+          author: req.body.author,
+          publisher: req.body.publisher,
+          category: req.body.category,
+          quantity: req.body.quantity,
+          details: req.body.details
+        })
+        .then(createdBooks => res.status(201).send(createdBooks))
+        .catch(error => res.status(400).send(error))
+    }
   })
-  .then(createdBooks => res.status(201).send(createdBooks))
-  .catch(error => res.status(400).send(error))
-
+}
 const getAll = (req, res) => books
   .all()
   .then(createdBooks => res.status(200).send(createdBooks))

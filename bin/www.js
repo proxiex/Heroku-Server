@@ -9,3 +9,4 @@ app.set('port', port)
 
 const server = http.createServer(app)
 server.listen(port)
+console.log('Sever is up and running.....')
