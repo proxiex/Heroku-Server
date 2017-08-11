@@ -1,6 +1,6 @@
 const users = require('../models').users
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+// const jwt = require('jsonwebtoken')
 
 const register = (req, res) => {
   users.find({
@@ -35,6 +35,7 @@ const register = (req, res) => {
 }
 
 const login = (req, res) => {
+  const session = req.session
   return users
     .findOne({
       where: {
@@ -56,17 +57,19 @@ const login = (req, res) => {
             message: 'User does not exsist! '
           })
         } else if (hashedPassword) {
-          const user = {
+          /* const user = {
             email: found.email,
             password: found.password
           }
           const token = jwt.sign(user, process.env.SECRET_KEY, {
             expiresIn: 40000
-          })
-
+          }) */
+          
+          session.uniqueID = req.body.email
+          console.log(session)
           res.status(200).send({
-            message: 'Login Successful!',
-            token: token
+            message: 'Login Successful!'
+            // token: token
           })
         } else {
           res.status(500).send({
